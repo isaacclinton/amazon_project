@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon.com Spend Less. Smile More.</title>
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet">
+    <link rel="icon" type="image/png" href="tab_logo.png">
+</head>
+
+<body>
+    <style>
+        :root {
+            font-family: 'Amazon Ember';
+
+        }
+
+        .header {
+            height: 60px;
+            background-color: rgb(19, 25, 33);
+            /* position: fixed; */
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            display: flex;
+            color: white;
+            z-index: 4;
+            width: 100%;
+            min-width: max-content;
+        }
+
+        .header div.logo {
+            height: inherit;
+            width: 113px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .header .topAction {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 8px;
+            padding-right: 8px;
+            flex-shrink: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            border-width: 1px;
+            border-style: solid;
+            border-color: transparent;
+            cursor: pointer;
+        }
+
+        .header .topAction:hover {
+            border-color: white;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 3px;
+            background-color: rgb(19, 25, 33);
+        }
+
+        .header .deliver {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .header .deliver .logo {
+            /* background-color: gray; */
+            margin-top: 10px;
+            height: 20px;
+        }
+
+        .header .topActionText {
+            font-size: 12px;
+            color: rgb(204, 204, 204);
+            margin: 0;
+        }
+
+        .topActionChoice {
+            font-weight: bold;
+            font-size: 13px;
+            margin: 0;
+            color: white;
+        }
+
+        .header .deliver .deliverInfo {
+            margin-left: 2px;
+        }
+
+        .header .deliver .deliverInfo p {
+            margin: 0;
+        }
+
+        .header .searchBox {
+            flex: 1;
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            min-width: 400px;
+            align-self: center;
+            border-radius: 3px;
+            overflow: hidden;
+            offset-anchor: left;
+        }
+
+
+
+        .header .searchBox input {
+            font-size: 15px;
+            height: 100%;
+            border: none;
+            width: 100%;
+            padding-left: 10px;
+            outline: none;
+        }
+
+        .header .searchBox:focus {
+            outline-style: solid;
+            outline-color: rgb(254, 189, 105);
+            outline-offset: 0;
+            outline-width: 5px;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            /* padding-top: 60px; */
+            /* overflow-x: scroll; */
+            display: inline-block;
+            min-width: 100%;
+        }
+
+
+        .header .searchBox .category {
+            color: black;
+            background-color: rgb(243, 243, 243);
+            height: calc(100% + 2px);
+            font-size: 14px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 7px;
+            padding-top: 3px;
+            cursor: pointer;
+        }
+
+        .header .searchBox .category:hover {
+            background-color: rgb(218, 218, 218);
+        }
+
+        img.dropDown {
+            width: 18px;
+            opacity: 0.5;
+            content: url("drop_down.svg");
+        }
+
+        .header .searchBox .searchBtn {
+            background-color: rgb(254, 189, 105);
+            height: calc(100% + 2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            cursor: pointer;
+        }
+
+        .header .searchBox .searchBtn:hover {
+            background-color: rgb(243, 168, 71);
+        }
+
+        .header .languageBox {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            margin-left: 20px;
+            flex-direction: row;
+        }
+
+        .header .languageBox .language {
+            margin-left: 5px;
+        }
+
+        .header .languageBox .dropDown {
+            content: url("drop_down_white.svg");
+            margin: 0px;
+            margin-top: 5px;
+            margin-left: -2px;
+        }
+
+        .header .account .dropDown {
+            content: url("drop_down_white.svg");
+        }
+
+        .header .accountBottom {
+            display: flex;
+        }
+
+
+        .header .cartBox {
+            flex-direction: row;
+            /* align-items: bottom; */
+            justify-content: center;
+            /* padding-bottom: 8px; */
+            margin-right: 20px;
+            /* display: flex; */
+
+        }
+
+        .header .cartBox .cartCount {
+            color: #F08A36;
+            position: absolute;
+            bottom: 30;
+            top: -12px;
+            /* left: 25px; */
+            font-size: 18px;
+            font-weight: bold;
+            /* top: 10px; */
+        }
+
+        .header .cartBox .cartImg img {
+            margin-left: -8px;
+        }
+
+        .header .cartBox .cartImg {
+            position: relative;
+            /* background-color: green; */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .header .cartBox .topActionChoice {
+            margin-left: -7px;
+            align-self: flex-end;
+            z-index: 10;
+            margin-bottom: 5px;
+        }
+    </style>
+    <style>
+        .navBar {
+            height: 35px;
+            background-color: rgb(35, 47, 62);
+            display: flex;
+            padding: 2px 0px;
+            align-items: center;
+        }
+
+        
+
+        .navBar .navBarItem {
+            color: white;
+            padding-right: 10px;
+            padding-left: 10px;
+            font-size: 13px;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 3px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .navBar .menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding-left: 4px;
+        }
+
+        .navBar .navBarItem:hover {
+            border-color: white;
+        }
+    </style>
+    <section class="header">
+        <div class="logo">
+            <img src="logo.png" alt="">
+        </div>
+        <div class="deliver topAction">
+            <img class="logo" src="deliver.png" alt="">
+            <div class="deliverInfo">
+                <p class="deliverText topActionText">
+                    Deliver to
+                </p>
+                <p class="deliverCountry topActionChoice">Kenya</p>
+            </div>
+
+        </div>
+
+        <div class="searchBox">
+            <div class="category">
+                <p class="categoryName">All</p>
+                <img class="dropDown" alt="">
+            </div>
+            <input type="text" placeholder="Search Amazon">
+            <div class="searchBtn">
+                <img src="search.png" alt="">
+            </div>
+        </div>
+        <div class="languageBox topAction">
+            <img src="flag.png" alt="" class="flag">
+            <p class="language">EN</p>
+            <img class="dropDown" alt="">
+        </div>
+
+        <div class="account topAction">
+            <p class="topActionText">Hello, sign in</p>
+            <div class="accountBottom">
+                <p class="topActionChoice">Account & Lists</p>
+                <img class="dropDown" alt="">
+            </div>
+        </div>
+
+        <div class="returnAndOrders topAction">
+            <p class="topActionText">Returns</p>
+            <p class="topActionChoice">& Orders</p>
+        </div>
+
+        <div class="cartBox topAction">
+            <div class="cartImg">
+                <img src="cart.png" alt="">
+                <p class="cartCount">0</p>
+            </div>
+            <p class="topActionChoice">Cart</p>
+        </div>
+    </section>
+    <section class="navBar">
+        <div class="menu navBarItem">
+            <img src="menu.png" alt="">
+            <p class="topActionChoice">All</p>
+        </div>
+        <div class="navBarItem">
+            <p>Today's deals</p>
+        </div>
+        <div class="navBarItem">
+            <p>Customer Service</p>
+        </div>
+        <div class="navBarItem">
+            <p>Registry</p>
+        </div>
+        <div class="navBarItem">
+            <p>Gift Cards</p>
+        </div>
+        <div class="navBarItem">
+            <p>Sell</p>
+        </div>
+    </section>
+    <section class="content">
+
+    </section>
+    <section class="sideMenu"></section>
+</body>
+
+</html>

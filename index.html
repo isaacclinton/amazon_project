@@ -256,7 +256,7 @@
             align-items: center;
         }
 
-        
+
 
         .navBar .navBarItem {
             color: white;
@@ -284,6 +284,277 @@
             border-color: white;
         }
     </style>
+
+    <style>
+        .sideMenu {
+            position: fixed;
+            left: -100%;
+            display: flex;
+            top: 0;
+            bottom: 0;
+            align-items: start;
+            transition: left 0.1s;
+            z-index: 4;
+        }
+
+        .sideMenu .content {
+            width: 350px;
+            height: 100%;
+            background-color: white;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sideMenu .cancelBtn {
+            margin-left: 10px;
+            margin-top: 20px;
+            height: 34px;
+            cursor: pointer;
+        }
+
+        .sideMenu .profileHeader {
+            background-color: #232f3e;
+            display: flex;
+            height: 50px;
+            align-items: center;
+            /* width: 100%; */
+            /* background-color: white; */
+            padding-left: 33px;
+        }
+
+        .sideMenu .profileHeader .greeting {
+            color: white;
+            font-weight: bold;
+            font-size: 19px;
+            margin-left: 8px;
+        }
+
+        .sideMenu .category {
+            border-top: 1px solid rgba(0, 0, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .sideMenu .category .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            margin-left: 33px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .sideMenu .category ul {
+            list-style: none;
+            /* background-color: yellow; */
+            padding: 0;
+            margin: 0;
+        }
+
+        .sideMenu .category ul .categoryItem {
+            display: flex;
+            padding-left: 33px;
+            align-items: center;
+            /* background-color: blue; */
+            padding-top: 12px;
+            padding-bottom: 12px;
+            justify-content: space-between;
+            padding-right: 20px;
+            cursor: pointer;
+        }
+
+        .sideMenu .category ul .categoryItem:hover {
+            background-color: rgb(234, 237, 237);
+        }
+
+        .sideMenu .category ul .categoryItem:hover .arrow {
+            content: url("images/right_arrow_dark.png");
+        }
+
+        .sideMenu .category ul .categoryItem .itemName {
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sideMenu .category ul .categoryItem .arrow {
+            content: url("images/right_arrow.png");
+        }
+
+        .revealedSideMenu {
+            left: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 3;
+        }
+    </style>
+
+    <style>
+        .dropDownCategoriesContainer {
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            width: fit-content;
+            border-radius: 5px;
+
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            font-size: 15px;
+
+            position: fixed;
+            display: none;
+
+            background-color: white;
+        }
+
+        .dropDownCategoriesContainer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropDownCategoriesContainer ul li {
+            padding-left: 5px;
+            padding-right: 5px;
+            cursor: default;
+        }
+
+        .dropDownCategoriesContainer ul li:hover {
+            color: white;
+            background-color: blue;
+        }
+
+        .revealedDropDown {
+            display: block;
+        }
+    </style>
+
+    <style>
+        body .contents {
+            background-color: white;
+            z-index: 1;
+        }
+
+        .languagesDropDownContainer {
+            /* display: none; */
+            
+            width: fit-content;
+            /* margin-top: 20px; */
+            /* margin-left: 20px; */
+            position: fixed;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            left: -100%;
+            border-radius: 3px;
+            z-index: -5;
+        }
+
+        .languagesDropDownContainer .notch {
+            --notch-height: 15px;
+            width: var(--notch-height);
+            height: var(--notch-height);
+            background-color: white;
+            rotate: 45deg;
+            position: absolute;
+            right: 130px;
+            top: calc(calc(var(--notch-height)/2 * -1) - 1px);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-right: none;
+            border-bottom: none;
+            z-index: 0;
+        }
+
+
+        .languagesDropDownContainer .contents {
+            background-color: white;
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 3px;
+            padding-left: 20px;
+            min-width: 500px;
+            overflow: hidden;
+        }
+
+        .languagesDropDownContainer .contents .signIn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+        }
+
+        .languagesDropDownContainer .contents .signIn button {
+            min-width: 230px;
+            max-width: 230px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+            background-color: rgb(255, 216, 20);
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .languagesDropDownContainer .contents .signIn p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .languagesDropDownContainer .contents .signIn p span {
+            color: blue;
+            cursor: pointer;
+        }
+
+        .languagesDropDownContainer .contents .listsParent {
+            display: flex;
+            align-items: stretch;
+            margin-top: 15px;
+        }
+
+        .languagesDropDownContainer .contents .listsParent .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .languagesDropDownContainer .contents .listsParent ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .languagesDropDownContainer .contents .listsParent ul li {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        .languagesDropDownContainer .contents .listsParent .divider {
+            width: 1px;
+            background-color: rgba(0, 0, 0, 0.2);
+            align-self: stretch;
+        }
+
+        .languagesDropDownContainer .contents .listsParent .lists {
+            width: calc(50% - 0.5px);
+        }
+
+        .languagesDropDownContainer .contents .listsParent .account {
+            width: calc(50% - 0.5px);
+            margin-left: 20px;
+        }
+    </style>
+
     <section class="header">
         <div class="logo">
             <img src="images/logo.png" alt="">
@@ -360,7 +631,287 @@
     <section class="content">
 
     </section>
-    <section class="sideMenu"></section>
+    <section class="sideMenu">
+        <div class="content">
+            <div class="profileHeader">
+                <img src="images/avatar.png" alt="" class="avatar">
+                <p class="greeting">Hello, Isaac</p>
+            </div>
+            <div class="category">
+                <p class="title">Digital Content & Devices</p>
+                <ul>
+                    <li>
+                        <div class="categoryItem">
+                            <p class="itemName">Amazon Music</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                        <div class="categoryItem">
+                            <p class="itemName">Kindle E-readers & Books</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                        <div class="categoryItem">
+                            <p class="itemName">Amazon Appstore</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="category">
+                <p class="title">Shop By Department</p>
+                <ul>
+                    <li>
+                        <div class="categoryItem">
+                            <p class="itemName">Electronics</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                        <div class="categoryItem">
+                            <p class="itemName">Computers</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                        <div class="categoryItem">
+                            <p class="itemName">Smart Home</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                        <div class="categoryItem">
+                            <p class="itemName">Arts & Crafts</p>
+                            <img class="arrow" src="" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <img class="cancelBtn" src="images/close.svg" alt="">
+    </section>
+
+    <div class="dropDownCategoriesContainer">
+        <ul>
+            <li>Departments</li>
+            <li>Arts & Crafts</li>
+            <li>Automotive</li>
+            <li>Baby</li>
+            <li>Beauty & Personal Care</li>
+            <li>Books</li>
+        </ul>
+    </div>
+
+    <div class="languagesDropDownContainer">
+
+        <div class="notch">
+
+        </div>
+        <div class="contents">
+            <div class="signIn">
+                <button>Sign in</button>
+                <p>New Customer? <span>Start here.</span></p>
+            </div>
+            <div class="listsParent">
+                <div class="lists">
+                    <p class="title">Your Lists</p>
+                    <ul>
+                        <li>Create a List</li>
+                        <li>Find a List or Registry</li>
+                    </ul>
+                </div>
+                <div class="divider"></div>
+                <div class="account">
+                    <p class="title">Your Account</p>
+                    <ul>
+                        <li>Account</li>
+                        <li>Orders</li>
+                        <li>Recommendations</li>
+                        <li>Browsing History</li>
+                        <li>Watchlist</li>
+                        <li>Video Purchases & Rentals</li>
+                        <li>Kindle Unlimited</li>
+                        <li>Content & Devices</li>
+                        <li>Subscribe & Save Items</li>
+                        <li>Membership & Subscriptions</li>
+                        <li>Music Library</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sideMenu = document.querySelector(".sideMenu");
+        let sideMenuBtn = document.querySelector(".navBar .menu");
+        let body = document.querySelector("body");
+        let closeSideMenuBtn = sideMenu.querySelector(".cancelBtn");
+        let overlay = document.createElement("div");
+        overlay.classList.add("overlay");
+
+        function hideSideMenu() {
+            sideMenu.classList.remove("revealedSideMenu");
+            body.removeChild(overlay);
+        }
+
+        closeSideMenuBtn.onclick = hideSideMenu;
+        overlay.onclick = hideSideMenu;
+
+        function revealSideMenu() {
+
+            body.appendChild(overlay);
+
+            sideMenu.classList.add("revealedSideMenu");
+
+        }
+
+        sideMenuBtn.onclick = revealSideMenu;
+    </script>
+
+    <script>
+
+        const dropDowns = [];
+
+        function hideAllDropdowns() {
+            for (let index in dropDowns) {
+                if (dropDowns[index].isShowingFunc()) {
+                    dropDowns[index].hideFunc();
+                }
+            }
+        }
+
+        document.onkeydown = function (event) {
+            event = event || window.event;
+            var isEscape = false;
+            if ("key" in event) {
+                isEscape = (event.key === "Escape" || event.key === "Esc");
+            } else {
+                isEscape = (event.keyCode === 27);
+            }
+            if (isEscape) {
+                hideAllDropdowns();
+            }
+        }
+
+        function addDropDown(dropDown) {
+            dropDown.btnElem.addEventListener('click', function (event) {
+                if (dropDown.isShowingFunc()) {
+                    dropDown.hideFunc();
+                } else {
+                    dropDown.showFunc();
+                }
+            });
+
+            dropDowns.push(dropDown);
+        }
+
+        class DropDown {
+            constructor(showFunc, btnElem, hideFunc, isShowingFunc, dropDownElem) {
+                this.showFunc = showFunc;
+                this.btnElem = btnElem;
+                this.hideFunc = hideFunc;
+                this.isShowingFunc = isShowingFunc;
+                this.dropDownElem = dropDownElem;
+            }
+        }
+
+        function clickedOnElement(element, clickEvent) {
+            let elemRect = element.getBoundingClientRect();
+            let height = elemRect.height;
+            let width = elemRect.width;
+            let elemY = elemRect.y;
+            let elemX = elemRect.x;
+            if (elemX <= clickEvent.x && elemY <= clickEvent.y) {
+                if ((elemX + width) >= clickEvent.x && (elemY + height) >= clickEvent.y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        document.addEventListener('click', function (event) {
+            for (let index in dropDowns) {
+                let dropDown = dropDowns[index];
+                if (dropDown.isShowingFunc()) {
+                    let clickedOnBtn = clickedOnElement(dropDown.btnElem, event);
+                    let clickedOnDropDown = clickedOnElement(dropDown.dropDownElem, event)
+                    if (clickedOnBtn || clickedOnDropDown) {
+                        return;
+                    } else {
+                        dropDown.hideFunc();
+                    }
+                }
+            }
+        });
+
+
+        {
+            let allCategories = ["Departments", "Arts & Crafts", "Automotive", "Baby", "Beauty & Personal Care", "Books", "Boys' Fashion"];
+            let allBtn = document.querySelector(".header .searchBox div.category");
+            let allCategoriesContainer = document.querySelector(".dropDownCategoriesContainer");
+            addDropDown(new DropDown(showAll, allBtn, hideAllDropDown, allIsShowing, allCategoriesContainer));
+
+            function hideAllDropDown() {
+                allCategoriesContainer.classList.remove("revealedDropDown");
+            }
+
+            function allIsShowing() {
+                return allCategoriesContainer.classList.contains("revealedDropDown");
+            }
+
+
+            function showAll() {
+                if (allIsShowing()) {
+                    return;
+                }
+                let positionOfAll = allBtn.getBoundingClientRect();
+                allCategoriesContainer.style.left = positionOfAll.left + 'px';
+                allCategoriesContainer.style.top = (positionOfAll.top + positionOfAll.height - 6) + 'px';
+                allCategoriesContainer.classList.add("revealedDropDown");
+            }
+
+        }
+
+        {
+
+            let accountBtn = document.querySelector(".header .account");
+            let accountDropDown = document.querySelector(".languagesDropDownContainer");
+
+            function showLanguagesDropDown() {
+                // var positionOfLanguagesBtn = languagesBtn.getBoundingClientRect();
+                
+                
+                let accountDownArrow = document.querySelector(".header .account .dropDown");
+                accountDropDown.classList.add("revealedDropDown");
+                let accountNotch = document.querySelector(".languagesDropDownContainer .notch");
+                
+                
+                let positionOfArrow = accountDownArrow.getBoundingClientRect();
+                let positionOfNotch = accountNotch.getBoundingClientRect();
+                let positionOfDropDown = accountDropDown.getBoundingClientRect();
+                let notchXDelta = positionOfNotch.x - positionOfDropDown.x;
+
+                console.log(`Position of DropDown: ${positionOfDropDown.x}`);
+                console.log(`Position of Notch: ${positionOfNotch.x}`);
+                console.log(notchXDelta);
+
+                accountDropDown.style.top = (positionOfArrow.bottom + 15) + "px";
+                accountDropDown.style.left = (positionOfArrow.left - notchXDelta) + "px";
+
+
+                accountDropDown.style.zIndex = "100";
+            }
+
+            function languagesDropDownIsShown() {
+                return accountDropDown.classList.contains("revealedDropDown");
+            }
+
+            function hideLanguagesDropDown() {
+                if (languagesDropDownIsShown()) {
+                    accountDropDown.classList.remove("revealedDropDown");
+                }
+            }
+
+            addDropDown(new DropDown(showLanguagesDropDown, accountBtn, hideLanguagesDropDown, languagesDropDownIsShown, accountDropDown));
+
+        }
+    </script>
+    <script>
+
+    </script>
 </body>
 
 </html>

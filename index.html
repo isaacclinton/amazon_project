@@ -438,16 +438,16 @@
         }
 
         .languagesDropDownContainer {
-            /* display: none; */
-            
+            display: none;
             width: fit-content;
-            /* margin-top: 20px; */
-            /* margin-left: 20px; */
             position: fixed;
             box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-            left: -100%;
+            /* left: -100%; */
             border-radius: 3px;
             z-index: -5;
+            left: 0;
+            top: 0;
+            transition: opacity 1s linear;
         }
 
         .languagesDropDownContainer .notch {
@@ -826,8 +826,10 @@
             for (let index in dropDowns) {
                 let dropDown = dropDowns[index];
                 if (dropDown.isShowingFunc()) {
-                    let clickedOnBtn = clickedOnElement(dropDown.btnElem, event);
-                    let clickedOnDropDown = clickedOnElement(dropDown.dropDownElem, event)
+                    let btn = dropDown.btnElem instanceof Function ? dropDown.btnElem() : dropDown.btnElem;
+                    let dropDownElem = dropDown.dropDownElem instanceof Function ? dropDown.dropDownElem() : dropDown.dropDownElem;
+                    let clickedOnBtn = clickedOnElement(btn, event);
+                    let clickedOnDropDown = clickedOnElement(dropDownElem, event)
                     if (clickedOnBtn || clickedOnDropDown) {
                         return;
                     } else {
@@ -868,17 +870,23 @@
         {
 
             let accountBtn = document.querySelector(".header .account");
-            let accountDropDown = document.querySelector(".languagesDropDownContainer");
+
+            accountBtn.addEventListener('mouseover', showLanguagesDropDown);
+            accountBtn.addEventListener('mouseout', hideLanguagesDropDown);
 
             function showLanguagesDropDown() {
+                if (languagesDropDownIsShown()) return;
                 // var positionOfLanguagesBtn = languagesBtn.getBoundingClientRect();
-                
-                
+
+                let accountDropDown = getAccountDropDown();
                 let accountDownArrow = document.querySelector(".header .account .dropDown");
                 accountDropDown.classList.add("revealedDropDown");
+                accountDropDown.style.display = "block";
+
+
                 let accountNotch = document.querySelector(".languagesDropDownContainer .notch");
-                
-                
+
+
                 let positionOfArrow = accountDownArrow.getBoundingClientRect();
                 let positionOfNotch = accountNotch.getBoundingClientRect();
                 let positionOfDropDown = accountDropDown.getBoundingClientRect();
@@ -895,17 +903,22 @@
                 accountDropDown.style.zIndex = "100";
             }
 
+            function getAccountDropDown() {
+                return document.querySelector(".languagesDropDownContainer");
+            }
+
             function languagesDropDownIsShown() {
-                return accountDropDown.classList.contains("revealedDropDown");
+                return getAccountDropDown().classList.contains("revealedDropDown");
             }
 
             function hideLanguagesDropDown() {
                 if (languagesDropDownIsShown()) {
-                    accountDropDown.classList.remove("revealedDropDown");
+                    getAccountDropDown().style.display = "none";
+                    getAccountDropDown().classList.remove("revealedDropDown");
                 }
             }
 
-            addDropDown(new DropDown(showLanguagesDropDown, accountBtn, hideLanguagesDropDown, languagesDropDownIsShown, accountDropDown));
+            addDropDown(new DropDown(showLanguagesDropDown, accountBtn, hideLanguagesDropDown, languagesDropDownIsShown, getAccountDropDown));
 
         }
     </script>
